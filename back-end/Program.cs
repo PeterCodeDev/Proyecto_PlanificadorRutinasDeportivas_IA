@@ -21,8 +21,14 @@ builder.Services.AddCors(options =>
 
 // 3. AÑADIR CONTROLADORES
 builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+
+    app.UseSwagger();
+    app.UseSwaggerUI();
+
 
 // 4. ACTIVAR CORS (Siempre antes del MapControllers)
 app.UseCors("PermitirAngular");
