@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
-using SmartWorkoutApi.Data; // Esto importa tu AppDbContext
+using SmartWorkoutApi.Data;
+using SmartWorkoutApi.Services; // Esto importa tu AppDbContext
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,6 +24,9 @@ builder.Services.AddCors(options =>
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+//El puente hacia python
+builder.Services.AddHttpClient<IAService>();
 
 var app = builder.Build();
 
