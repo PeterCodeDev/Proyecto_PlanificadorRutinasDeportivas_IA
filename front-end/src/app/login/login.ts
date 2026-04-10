@@ -27,14 +27,16 @@ export class Login {
 
   onLogin() {
   this.mensajeError = ''; 
-
   this.usuarioService.login(this.credenciales).subscribe({
-    next: () => {
-      // SI ES CORRECTO: Directo a la página de track sin avisos
+    next: (res: any) => {
+      // Guardamos el nombre que viene del servidor (res.nombre)
+      if (res && res.nombre) {
+        localStorage.setItem('usuarioNombre', res.nombre);
+      }
+      // Ahora sí, entramos
       this.router.navigate(['/track']); 
     },
     error: (err) => {
-      // SI ES INCORRECTO: Mostramos el aviso en el cuadro rojo
       this.mensajeError = "Correo o contraseña incorrectos";
     }
   });
