@@ -1,43 +1,57 @@
-<main class="w-full max-w-md">
+<div class="min-h-screen flex flex-col items-center justify-center w-full p-6 bg-slate-50 dark:bg-slate-900">
+    
     <div class="text-center mb-8">
-        <h1 class="font-extrabold tracking-tighter text-primary text-4xl">Smart Workout</h1>
-        <p class="text-on-surface-variant text-sm font-medium mt-2 tracking-wide uppercase">The Kinetic Gallery</p>
+        <h1 class="text-4xl font-extrabold text-blue-600 tracking-tight mb-1">Smart Workout</h1>
+        <p class="text-xs text-slate-500 font-bold uppercase tracking-widest">The Kinetic Gallery</p>
     </div>
-    
-    <div class="bg-surface-container-lowest rounded-xl shadow-[0_20px_40px_rgba(0,88,190,0.06)] border border-outline-variant/10 p-6">
-        <div class="flex mb-8 gap-1 p-1 bg-surface-container-low rounded-lg">
-            <button class="flex-1 py-2.5 text-sm font-bold rounded-md bg-surface-container-lowest text-primary shadow-sm">Entrar</button>
-            <button class="flex-1 py-2.5 text-sm font-semibold rounded-md text-on-surface-variant hover:text-on-surface transition-colors">Unirse</button>
-        </div>
-        
-        <form class="space-y-6" onsubmit="return false;">
-            <div>
-                <label class="block text-[10px] font-bold tracking-widest text-on-surface-variant uppercase mb-2 ml-1" for="email">CORREO ELECTRÓNICO</label>
-                <div class="relative">
-                    <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline text-lg" data-icon="mail">mail</span>
-                    <input class="w-full pl-11 pr-4 py-3.5 bg-surface-container-low border-none rounded-lg focus:ring-2 focus:ring-primary/20 focus:bg-surface-container-lowest transition-all text-on-surface placeholder:text-outline/60" id="email" placeholder="exemplo@smart.com" type="email"/>
-                </div>
-            </div>
-            <div>
-                <div class="flex justify-between items-center mb-2 ml-1">
-                    <label class="block text-[10px] font-bold tracking-widest text-on-surface-variant uppercase" for="password">CONTRASEÑA</label>
-                    <a class="text-[10px] font-bold text-primary hover:underline uppercase tracking-wider" href="#">¿Olvidaste?</a>
-                </div>
-                <div class="relative">
-                    <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline text-lg" data-icon="lock">lock</span>
-                    <input class="w-full pl-11 pr-4 py-3.5 bg-surface-container-low border-none rounded-lg focus:ring-2 focus:ring-primary/20 focus:bg-surface-container-lowest transition-all text-on-surface placeholder:text-outline/60" id="password" placeholder="••••••••" type="password"/>
-                </div>
-            </div>
-            <button class="bg-login-gradient text-on-primary py-4 rounded-full font-bold text-sm tracking-wide shadow-[0_10px_20px_rgba(0,88,190,0.15)] hover:scale-[1.02] active:scale-95 transition-all w-3/4 mx-auto block" type="submit">Entrar a la Plataforma</button>
-        </form>
-    </div>
-    
-    <footer class="mt-8 text-center">
-        <p class="text-on-surface-variant text-xs font-medium">Al entrar, aceptas nuestros <br/>
-            <a class="text-on-surface font-bold hover:underline" href="#">Términos de Servicio</a> y <a class="text-on-surface font-bold hover:underline" href="#">Privacidad</a>.
-        </p>
-    </footer>
-</main>
 
-<div class="fixed top-[-10%] right-[-5%] w-[400px] h-[400px] bg-primary/5 rounded-full blur-[100px] -z-10"></div>
-<div class="fixed bottom-[-10%] left-[-5%] w-[300px] h-[300px] bg-secondary/5 rounded-full blur-[80px] -z-10"></div>
+    <div class="bg-white dark:bg-slate-800 w-full max-w-md rounded-[2rem] shadow-xl shadow-slate-200/50 dark:shadow-none p-6 md:p-8">
+        
+        <div class="flex bg-slate-50 dark:bg-slate-700/50 p-1 rounded-2xl mb-8">
+            <button class="flex-1 bg-white dark:bg-slate-800 text-blue-600 dark:text-blue-400 font-bold py-3 rounded-xl shadow-sm text-sm transition-all">
+                Entrar
+            </button>
+            <button routerLink="/register" class="flex-1 text-slate-500 dark:text-slate-400 font-bold py-3 rounded-xl text-sm hover:text-slate-700 transition-colors">
+                Unirse
+            </button>
+        </div>
+
+        <div class="mb-6">
+            <label class="block text-[10px] font-bold uppercase tracking-widest text-slate-500 dark:text-slate-400 mb-2 px-1">
+                Correo Electrónico
+            </label>
+            <div class="relative">
+                <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">mail</span>
+                <input type="email" 
+                       placeholder="ejemplo@smart.com" 
+                       class="w-full bg-slate-50 dark:bg-slate-900/50 border-none rounded-2xl py-4 pl-12 pr-4 text-slate-700 dark:text-slate-200 focus:ring-2 focus:ring-blue-500 outline-none transition-all placeholder:text-slate-400/70 font-medium">
+            </div>
+        </div>
+
+        <div class="mb-8">
+            <div class="flex justify-between items-center mb-2 px-1">
+                <label class="block text-[10px] font-bold uppercase tracking-widest text-slate-500 dark:text-slate-400">
+                    Contraseña
+                </label>
+                </div>
+            <div class="relative">
+                <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">lock</span>
+                <input type="password" 
+                       placeholder="••••••••" 
+                       class="w-full bg-slate-50 dark:bg-slate-900/50 border-none rounded-2xl py-4 pl-12 pr-4 text-slate-700 dark:text-slate-200 focus:ring-2 focus:ring-blue-500 outline-none transition-all placeholder:text-slate-400/70 tracking-widest">
+            </div>
+        </div>
+
+        <button routerLink="/track" 
+                class="w-full bg-blue-600 text-white py-4 rounded-full font-bold text-sm hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-600/30 transition-all active:scale-[0.98]">
+            Entrar a la Plataforma
+        </button>
+    </div>
+
+    <p class="text-center text-slate-500 dark:text-slate-400 text-xs mt-8 max-w-[250px] leading-relaxed">
+        Al entrar, aceptas nuestros <br> 
+        <span class="font-bold text-slate-700 dark:text-slate-300 cursor-pointer hover:underline">Términos de Servicio</span> y 
+        <span class="font-bold text-slate-700 dark:text-slate-300 cursor-pointer hover:underline">Privacidad</span>.
+    </p>
+
+</div>

@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
+import { RouterLink, RouterLinkActive } from '@angular/router'; 
 
 @Component({
   selector: 'app-ai-coach',
-  imports: [],
+  imports: [RouterLink, RouterLinkActive],
   templateUrl: './ai-coach.html',
   styleUrl: './ai-coach.css',
 })

@@ -129,21 +129,31 @@
   </main>
 
   <nav class="fixed bottom-0 left-0 w-full bg-white/70 dark:bg-slate-900/70 backdrop-blur-xl z-50 rounded-t-[1.5rem] shadow-[0_-20px_40px_rgba(0,88,190,0.06)]">
-      <div class="flex justify-around items-center px-4 py-3 pb-safe">
-          <button class="flex flex-col items-center justify-center bg-blue-100/50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-2xl px-5 py-2 transition-all">
-              <span class="material-symbols-outlined filled-icon" data-icon="fitness_center">fitness_center</span>
-              <span class="font-inter text-xs uppercase tracking-widest font-bold mt-1">Track</span>
-          </button>
-          <button class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-5 py-2 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">
-              <span class="material-symbols-outlined" data-icon="smart_toy">smart_toy</span>
-              <span class="font-inter text-xs uppercase tracking-widest font-bold mt-1">AI Coach</span>
-          </button>
-          <button class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-5 py-2 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">
-              <span class="material-symbols-outlined" data-icon="person">person</span>
-              <span class="font-inter text-xs uppercase tracking-widest font-bold mt-1">Profile</span>
-          </button>
-      </div>
-  </nav>
+    <div class="flex justify-around items-center px-4 py-3 pb-safe">
+        
+        <a routerLink="/track" 
+           routerLinkActive="bg-blue-100/50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300"
+           class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-5 py-2 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all rounded-2xl cursor-pointer">
+            <span class="material-symbols-outlined filled-icon" data-icon="fitness_center">fitness_center</span>
+            <span class="font-inter text-xs uppercase tracking-widest font-bold mt-1">Track</span>
+        </a>
+
+        <a routerLink="/ai-coach" 
+           routerLinkActive="bg-blue-100/50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300"
+           class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-5 py-2 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all rounded-2xl cursor-pointer">
+            <span class="material-symbols-outlined" data-icon="smart_toy">smart_toy</span>
+            <span class="font-inter text-xs uppercase tracking-widest font-bold mt-1">AI Coach</span>
+        </a>
+
+        <a routerLink="/login" 
+           routerLinkActive="bg-blue-100/50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300"
+           class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-5 py-2 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all rounded-2xl cursor-pointer">
+            <span class="material-symbols-outlined" data-icon="person">person</span>
+            <span class="font-inter text-xs uppercase tracking-widest font-bold mt-1">Profile</span>
+        </a>
+
+    </div>
+</nav>
 
   <button class="fixed right-6 bottom-24 w-16 h-16 bg-gradient-to-br from-primary to-primary-container text-white rounded-full flex items-center justify-center shadow-[0_20px_40px_rgba(0,88,190,0.3)] hover:scale-105 active:scale-95 transition-all">
       <span class="material-symbols-outlined" data-icon="add" style="font-size: 32px;">add</span>
