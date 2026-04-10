@@ -9,6 +9,14 @@
   </header>
 
   <main class="pt-24 px-6 max-w-xl mx-auto">
+      
+      <div class="mb-8">
+          <h2 class="text-2xl font-bold text-slate-800 dark:text-white">
+              ¡Bienvenido, <span class="text-blue-600">{{ nombreUsuario || 'Atleta' }}</span>!
+          </h2>
+          <p class="text-slate-500 text-sm font-medium">Es un buen día para entrenar.</p>
+      </div>
+
       <section class="mb-8">
           <label class="font-label text-xs uppercase tracking-widest font-bold text-on-surface-variant mb-1 block">Session Tracking</label>
           <h1 class="text-3xl font-extrabold tracking-tight text-on-surface">Monday, Oct 24</h1>
@@ -153,7 +161,7 @@
         </a>
 
     </div>
-</nav>
+  </nav>
 
   <button class="fixed right-6 bottom-24 w-16 h-16 bg-gradient-to-br from-primary to-primary-container text-white rounded-full flex items-center justify-center shadow-[0_20px_40px_rgba(0,88,190,0.3)] hover:scale-105 active:scale-95 transition-all">
       <span class="material-symbols-outlined" data-icon="add" style="font-size: 32px;">add</span>

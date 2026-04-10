@@ -8,6 +8,11 @@ import { RouterLink } from '@angular/router'; // 1. Importar
   templateUrl: './register.html', // (o .component.html)
   styleUrls: ['./register.css']   // (o .component.css)
 })
-export class Register { // Recuerda este nombre para el Paso 3
-
+// En src/app/register/register.ts
+export class Register {
+  guardarNombre(nombre: string) {
+    if (nombre) {
+      localStorage.setItem('usuarioNombre', nombre);
+    }
+  }
 }
