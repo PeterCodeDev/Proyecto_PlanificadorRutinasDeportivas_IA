@@ -2,7 +2,7 @@
     
     <div class="text-center mb-8">
         <h1 class="text-4xl font-extrabold text-blue-600 tracking-tight mb-1">Smart Workout</h1>
-        <p class="text-xs text-slate-500 font-bold uppercase tracking-widest">The Kinetic Gallery</p>
+        <p class="text-xs text-slate-500 font-bold uppercase tracking-widest">Smart Workout IA</p>
     </div>
 
     <div class="bg-white dark:bg-slate-800 w-full max-w-md rounded-[2rem] shadow-xl shadow-slate-200/50 dark:shadow-none p-6 md:p-8">
@@ -22,7 +22,7 @@
             </label>
             <div class="relative">
                 <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">person</span>
-                <input type="text" #userName placeholder="Tu nombre" class="w-full bg-slate-50 dark:bg-slate-900/50 border-none rounded-2xl py-4 pl-12 pr-4 text-slate-700 dark:text-slate-200 focus:ring-2 focus:ring-blue-500 outline-none transition-all placeholder:text-slate-400/70 font-medium">
+                <input type="text" [(ngModel)]="usuario.nombre" name="nombre" placeholder="Tu nombre" class="w-full bg-slate-50 dark:bg-slate-900/50 border-none rounded-2xl py-4 pl-12 pr-4 text-slate-700 dark:text-slate-200 focus:ring-2 focus:ring-blue-500 outline-none transition-all placeholder:text-slate-400/70 font-medium">
             </div>
         </div>
 
@@ -32,7 +32,7 @@
             </label>
             <div class="relative">
                 <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">mail</span>
-                <input type="email" placeholder="ejemplo@smart.com" class="w-full bg-slate-50 dark:bg-slate-900/50 border-none rounded-2xl py-4 pl-12 pr-4 text-slate-700 dark:text-slate-200 focus:ring-2 focus:ring-blue-500 outline-none transition-all">
+                <input type="email" [(ngModel)]="usuario.email" name="email" placeholder="ejemplo@smart.com" class="w-full bg-slate-50 dark:bg-slate-900/50 border-none rounded-2xl py-4 pl-12 pr-4 text-slate-700 dark:text-slate-200 focus:ring-2 focus:ring-blue-500 outline-none transition-all">
             </div>
         </div>
 
@@ -42,7 +42,7 @@
             </label>
             <div class="relative">
                 <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">lock</span>
-                <input type="password" placeholder="••••••••" class="w-full bg-slate-50 dark:bg-slate-900/50 border-none rounded-2xl py-4 pl-12 pr-4 text-slate-700 dark:text-slate-200 focus:ring-2 focus:ring-blue-500 outline-none transition-all tracking-widest">
+                <input type="password" [(ngModel)]="usuario.password" name="password" placeholder="••••••••" class="w-full bg-slate-50 dark:bg-slate-900/50 border-none rounded-2xl py-4 pl-12 pr-4 text-slate-700 dark:text-slate-200 focus:ring-2 focus:ring-blue-500 outline-none transition-all tracking-widest">
             </div>
         </div>
 
@@ -52,11 +52,11 @@
             </label>
             <div class="relative">
                 <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">lock</span>
-                <input type="password" placeholder="••••••••" class="w-full bg-slate-50 dark:bg-slate-900/50 border-none rounded-2xl py-4 pl-12 pr-4 text-slate-700 dark:text-slate-200 focus:ring-2 focus:ring-blue-500 outline-none transition-all tracking-widest">
+                <input type="password" #confirmPass placeholder="••••••••" class="w-full bg-slate-50 dark:bg-slate-900/50 border-none rounded-2xl py-4 pl-12 pr-4 text-slate-700 dark:text-slate-200 focus:ring-2 focus:ring-blue-500 outline-none transition-all tracking-widest">
             </div>
         </div>
 
-        <button (click)="guardarNombre(userName.value)" routerLink="/track" class="w-full bg-blue-600 text-white py-4 rounded-full font-bold text-sm hover:bg-blue-700 hover:shadow-lg transition-all active:scale-[0.98]">
+        <button (click)="onRegister(confirmPass.value)" class="w-full bg-blue-600 text-white py-4 rounded-full font-bold text-sm hover:bg-blue-700 hover:shadow-lg transition-all active:scale-[0.98]">
             Crear Cuenta
         </button>
     </div>

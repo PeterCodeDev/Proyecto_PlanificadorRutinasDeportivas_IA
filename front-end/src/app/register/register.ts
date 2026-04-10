@@ -22,18 +22,24 @@ export class Register {
     private usuarioService: UsuarioService,
     private router: Router
   ) {}
-
-  onRegister() {
-    // Llamamos al servicio para enviar los datos a C#
-    this.usuarioService.registrar(this.usuario).subscribe({
-      next: (res) => {
-        alert("¡Registro exitoso en la base de datos!");
-        this.router.navigate(['/login']); // Te manda al login automáticamente
-      },
-      error: (err) => {
-        // Aquí verás el error de "El correo ya existe" que pusimos en C#
-        alert("Error al registrar: " + (err.error || "Servidor no disponible"));
-      }
-    });
+  
+  onRegister(confirmacion: string) {
+  // 1. Validar que las contraseñas coincidan
+  if (this.usuario.password !== confirmacion) {
+    alert("Las contraseñas no coinciden.");
+    return;
   }
+
+  // 2. Si coinciden, enviar al servidor
+  this.usuarioService.registrar(this.usuario).subscribe({
+    next: (res) => {
+      alert("¡Cuenta creada con éxito!");
+      this.router.navigate(['/login']);
+    },
+    error: (err) => {
+      // Mostrará "El correo ya está registrado" si el API devuelve error
+      alert("Error: " + (err.error || "No se pudo conectar con el servidor"));
+    }
+  });
+}
 }
