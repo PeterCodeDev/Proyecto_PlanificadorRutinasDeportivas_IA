@@ -1,0 +1,43 @@
+<main class="w-full max-w-md">
+    <div class="text-center mb-8">
+        <h1 class="font-extrabold tracking-tighter text-primary text-4xl">Smart Workout</h1>
+        <p class="text-on-surface-variant text-sm font-medium mt-2 tracking-wide uppercase">The Kinetic Gallery</p>
+    </div>
+    
+    <div class="bg-surface-container-lowest rounded-xl shadow-[0_20px_40px_rgba(0,88,190,0.06)] border border-outline-variant/10 p-6">
+        <div class="flex mb-8 gap-1 p-1 bg-surface-container-low rounded-lg">
+            <button class="flex-1 py-2.5 text-sm font-bold rounded-md bg-surface-container-lowest text-primary shadow-sm">Entrar</button>
+            <button class="flex-1 py-2.5 text-sm font-semibold rounded-md text-on-surface-variant hover:text-on-surface transition-colors">Unirse</button>
+        </div>
+        
+        <form class="space-y-6" onsubmit="return false;">
+            <div>
+                <label class="block text-[10px] font-bold tracking-widest text-on-surface-variant uppercase mb-2 ml-1" for="email">CORREO ELECTRÓNICO</label>
+                <div class="relative">
+                    <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline text-lg" data-icon="mail">mail</span>
+                    <input class="w-full pl-11 pr-4 py-3.5 bg-surface-container-low border-none rounded-lg focus:ring-2 focus:ring-primary/20 focus:bg-surface-container-lowest transition-all text-on-surface placeholder:text-outline/60" id="email" placeholder="exemplo@smart.com" type="email"/>
+                </div>
+            </div>
+            <div>
+                <div class="flex justify-between items-center mb-2 ml-1">
+                    <label class="block text-[10px] font-bold tracking-widest text-on-surface-variant uppercase" for="password">CONTRASEÑA</label>
+                    <a class="text-[10px] font-bold text-primary hover:underline uppercase tracking-wider" href="#">¿Olvidaste?</a>
+                </div>
+                <div class="relative">
+                    <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline text-lg" data-icon="lock">lock</span>
+                    <input class="w-full pl-11 pr-4 py-3.5 bg-surface-container-low border-none rounded-lg focus:ring-2 focus:ring-primary/20 focus:bg-surface-container-lowest transition-all text-on-surface placeholder:text-outline/60" id="password" placeholder="••••••••" type="password"/>
+                </div>
+            </div>
+            <button class="bg-login-gradient text-on-primary py-4 rounded-full font-bold text-sm tracking-wide shadow-[0_10px_20px_rgba(0,88,190,0.15)] hover:scale-[1.02] active:scale-95 transition-all w-3/4 mx-auto block" type="submit">Entrar a la Plataforma</button>
+        </form>
+    </div>
+    
+    <footer class="mt-8 text-center">
+        <p class="text-on-surface-variant text-xs font-medium">Al entrar, aceptas nuestros <br/>
+            <a class="text-on-surface font-bold hover:underline" href="#">Términos de Servicio</a> y <a class="text-on-surface font-bold hover:underline" href="#">Privacidad</a>.
+        </p>
+    </footer>
+</main>
+
+<div class="fixed top-[-10%] right-[-5%] w-[400px] h-[400px] bg-primary/5 rounded-full blur-[100px] -z-10"></div>
+<div class="fixed bottom-[-10%] left-[-5%] w-[300px] h-[300px] bg-secondary/5 rounded-full blur-[80px] -z-10"></div>
