@@ -3,6 +3,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AICoachService } from '../services/ai-coach.service';
+import { MarkdownModule } from 'ngx-markdown';
 
 interface Mensaje {
   texto: string;
@@ -12,7 +13,7 @@ interface Mensaje {
 @Component({
   standalone: true,
   selector: 'app-ai-coach',
-  imports: [RouterLink, RouterLinkActive, CommonModule, FormsModule],
+  imports: [RouterLink, RouterLinkActive, CommonModule, FormsModule, MarkdownModule],
   templateUrl: './ai-coach.html',
   styleUrl: './ai-coach.css',
 })
