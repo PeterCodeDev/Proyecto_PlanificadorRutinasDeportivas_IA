@@ -42,10 +42,12 @@
                     [ngClass]="msg.sender === 'ia' ? 'items-start' : 'items-end self-end'">
 
                     <div [ngClass]="msg.sender === 'ia' 
-                                    ? 'bg-surface-container-high text-on-surface rounded-tl-none' 
-                                    : 'bg-primary text-on-primary rounded-tr-none'"
+                            ? 'bg-surface-container-high text-on-surface rounded-tl-none' 
+                            : 'bg-primary text-on-primary rounded-tr-none'"
                         class="p-4 rounded-2xl max-w-[85%] font-body leading-relaxed">
-                        {{ msg.texto }}
+
+                        <markdown [data]="msg.texto"></markdown>
+
                     </div>
 
                     <span class="text-[10px] mt-1 font-label text-on-surface-variant/60 uppercase"
