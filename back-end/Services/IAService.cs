@@ -30,9 +30,28 @@ namespace SmartWorkoutApi.Services
             }
             catch
             {
-                return "Error: Asegurate de que el servicio de Python esta encendido"
+                return "Error: Asegurate de que el servicio de Python esta encendido";
             }
             return "Sin recomendacion disponible";
+        }
+        public async Task<string> ConsultarCoachIA(string mensajeUsuario)
+        {
+            var peticion = new { mensaje_usuario = mensajeUsuario };
+
+            try
+            {
+                var response = await _httpClient.PostAsJsonAsync("http://localhost:8000/generar-rutina", peticion);
+                if (response.IsSuccessStatusCode)
+                {
+                    var resultado = await response.Content.ReadFromJsonAsync<dynamic>();
+                    return resultado.GetProperty("respuesta").GetString();
+                }
+            }
+            catch
+            {
+                return "Error de conexion: El servicio de IA local no esta accesible";
+            }
+            return "No pude generar una rutina en este momento";
         }
     }
 }
