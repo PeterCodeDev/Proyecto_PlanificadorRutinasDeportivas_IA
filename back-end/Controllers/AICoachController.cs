@@ -17,27 +17,35 @@ namespace SmartWorkoutApi.Controllers
         [HttpPost("generar-rutina")]
         public async Task<IActionResult> GetRoutine([FromBody] CoachRequest request)
         {
-            // IMPORTANTE: Creamos el objeto con el nombre exacto que espera Python
+            // TRADUCCIÓN CRÍTICA: Angular envía "Mensaje", Python espera "mensaje_usuario"
+            // Al crear este objeto anónimo, evitamos el error 'dynamic' de Visual Studio
             var payloadParaPython = new
             {
                 mensaje_usuario = request.Mensaje
             };
 
-            // Enviamos el payload corregido
-            var response = await _httpClient.PostAsJsonAsync("http://localhost:8000/generar-rutina", payloadParaPython);
-
-            if (response.IsSuccessStatusCode)
+            try
             {
-                // Python devuelve {"respuesta": "..."}. Lo leemos dinámicamente o con una clase.
-                var content = await response.Content.ReadFromJsonAsync<dynamic>();
-                return Ok(new { respuesta_ia = content.GetProperty("respuesta").GetString() });
-            }
+                // Llamamos a FastAPI (Puerto 8000)
+                var response = await _httpClient.PostAsJsonAsync("http://localhost:8000/generar-rutina", payloadParaPython);
 
-            return BadRequest("La IA no respondió correctamente.");
+                if (response.IsSuccessStatusCode)
+                {
+                    var contenido = await response.Content.ReadFromJsonAsync<RespuestaIA>();
+                    // Devolvemos a Angular el formato que su interfaz espera
+                    return Ok(new { respuesta_ia = contenido.respuesta });
+                }
+
+                return StatusCode((int)response.StatusCode, "Error desde el servicio de Python");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Error de conexión con la IA: {ex.Message}");
+            }
         }
     }
 
-    // Clases de apoyo para evitar el error de 'dynamic'
+    // Clases de soporte para evitar el uso de 'dynamic'
     public class CoachRequest { public string Mensaje { get; set; } }
     public class RespuestaIA { public string respuesta { get; set; } }
 }
