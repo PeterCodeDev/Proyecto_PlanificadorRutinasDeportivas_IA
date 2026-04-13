@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core'; // Importado ChangeDetectorRef
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -23,45 +23,57 @@ export class AiCoach implements OnInit {
   ];
   cargando: boolean = false;
 
-  constructor(private aiService: AICoachService) { }
+  // Se inyecta el servicio y el detector de cambios
+  constructor(
+    private aiService: AICoachService,
+    private cdr: ChangeDetectorRef
+  ) { }
 
   ngOnInit(): void { }
 
   enviarConsulta() {
+    // Validamos que haya texto y no estemos ya cargando
     if (!this.mensajeUsuario.trim() || this.cargando) return;
 
     const textoParaEnviar = this.mensajeUsuario.trim();
 
-    // 1. Añadimos tu mensaje
+    // 1. Añadimos el mensaje del usuario al chat
     this.chatHistory.push({
       texto: textoParaEnviar,
       sender: 'user'
     });
 
     this.mensajeUsuario = '';
-    this.cargando = true; // <--- Aquí activamos el "Escribiendo..."
+    this.cargando = true; // Activa el estado visual "Escribiendo..."
 
-    // 2. Llamada al servicio
+    // 2. Llamada al servicio hacia el puente C#
     this.aiService.enviarPregunta(textoParaEnviar).subscribe({
-      next: (res) => {
-        console.log('Respuesta recibida de la IA:', res);
+      next: (res: any) => {
+        console.log('Respuesta recibida:', res); // Verifica que llega el objeto respuesta_ia
 
-        // 3. Añadimos la respuesta usando el nombre exacto de tu consola: respuesta_ia
+        // 3. Mapeamos la respuesta según lo que vemos en la consola
+        const respuestaTexto = res.respuesta_ia || res.respuesta || "La IA no devolvió texto.";
+
         this.chatHistory.push({
-          texto: res.respuesta_ia,
+          texto: respuestaTexto,
           sender: 'ia'
         });
 
-        // 4. APAGAMOS el estado de carga (esto quita el "Escribiendo...")
+        // 4. Finalizamos el estado de carga
         this.cargando = false;
+
+        // 5. FORZAR ACTUALIZACIÓN: Esto soluciona que el mensaje no salga hasta hacer clic
+        this.cdr.detectChanges();
       },
       error: (err) => {
-        console.error('Fallo en la comunicación:', err);
+        console.error('Error en la llamada:', err);
         this.chatHistory.push({
-          texto: 'Lo siento, hubo un error al conectar con el servidor.',
+          texto: 'Error de conexión. Revisa que el puente C# esté en ejecución.',
           sender: 'ia'
         });
-        this.cargando = false; // <--- También apagamos si hay error
+
+        this.cargando = false;
+        this.cdr.detectChanges(); // Refrescamos también en caso de error
       }
     });
   }
