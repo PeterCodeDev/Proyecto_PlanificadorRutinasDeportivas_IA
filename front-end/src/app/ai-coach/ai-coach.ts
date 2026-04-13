@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { CommonModule } from '@angular/common'; // Para directivas como *ngFor
-import { FormsModule } from '@angular/forms'; // Para el [(ngModel)]
-import { AICoachService } from '../services/ai-coach.service'; // Ajusta la ruta a tu servicio
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { AICoachService } from '../services/ai-coach.service';
 
 interface Mensaje {
   texto: string;
@@ -12,14 +12,11 @@ interface Mensaje {
 @Component({
   standalone: true,
   selector: 'app-ai-coach',
-  // Es vital añadir CommonModule y FormsModule aquí
   imports: [RouterLink, RouterLinkActive, CommonModule, FormsModule],
   templateUrl: './ai-coach.html',
   styleUrl: './ai-coach.css',
 })
 export class AiCoach implements OnInit {
-
-  // Propiedades para el chat
   mensajeUsuario: string = '';
   chatHistory: Mensaje[] = [
     { texto: '¡Hola! Soy tu coach de Kinetic Gallery. ¿En qué músculo quieres trabajar hoy?', sender: 'ia' }
@@ -28,39 +25,43 @@ export class AiCoach implements OnInit {
 
   constructor(private aiService: AICoachService) { }
 
-  ngOnInit(): void {
-    // Aquí podrías cargar un saludo inicial si quisieras
-  }
+  ngOnInit(): void { }
 
   enviarConsulta() {
     if (!this.mensajeUsuario.trim() || this.cargando) return;
 
-    // 1. Añadimos tu mensaje a la pantalla
+    const textoParaEnviar = this.mensajeUsuario.trim();
+
+    // 1. Añadimos tu mensaje
     this.chatHistory.push({
-      texto: this.mensajeUsuario,
+      texto: textoParaEnviar,
       sender: 'user'
     });
 
-    const consultaParaEnviar = this.mensajeUsuario;
-    this.mensajeUsuario = ''; // Limpiamos el input inmediatamente
-    this.cargando = true;
+    this.mensajeUsuario = '';
+    this.cargando = true; // <--- Aquí activamos el "Escribiendo..."
 
-    // 2. Llamada al puente de C#
-    this.aiService.enviarPregunta(consultaParaEnviar).subscribe({
+    // 2. Llamada al servicio
+    this.aiService.enviarPregunta(textoParaEnviar).subscribe({
       next: (res) => {
+        console.log('Respuesta recibida de la IA:', res);
+
+        // 3. Añadimos la respuesta usando el nombre exacto de tu consola: respuesta_ia
         this.chatHistory.push({
           texto: res.respuesta_ia,
           sender: 'ia'
         });
+
+        // 4. APAGAMOS el estado de carga (esto quita el "Escribiendo...")
         this.cargando = false;
       },
       error: (err) => {
-        console.error('Error en la conexión:', err);
+        console.error('Fallo en la comunicación:', err);
         this.chatHistory.push({
-          texto: 'Error de conexión. Revisa que Python y C# estén activos.',
+          texto: 'Lo siento, hubo un error al conectar con el servidor.',
           sender: 'ia'
         });
-        this.cargando = false; // <--- ESTO DESBLOQUEA EL BOTÓN "PENSANDO"
+        this.cargando = false; // <--- También apagamos si hay error
       }
     });
   }

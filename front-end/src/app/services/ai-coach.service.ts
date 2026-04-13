@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-// Definimos la interfaz para que TypeScript sepa qué recibimos
+// Esta interfaz debe tener el nombre EXACTO que ves en la consola
 export interface IAConfigResponse {
   respuesta_ia: string;
 }
@@ -11,14 +11,12 @@ export interface IAConfigResponse {
   providedIn: 'root'
 })
 export class AICoachService {
-  // Asegúrate de que este puerto coincida con el de tu Visual Studio (C#)
-  private apiUrl = 'http://localhost:8000/generar-rutina';
+  private apiUrl = 'https://localhost:7000/api/AiCoach/generar-rutina';
 
   constructor(private http: HttpClient) { }
 
-  // Método para enviar la pregunta al Backend de .NET
-  enviarPregunta(mensaje: string): Observable<IAConfigResponse> {
-    const body = { mensaje: mensaje }; // Coincide con CoachRequest { Mensaje } en C#
-    return this.http.post<IAConfigResponse>(this.apiUrl, body);
+  enviarPregunta(texto: string): Observable<IAConfigResponse> {
+    // IMPORTANTE: 'Mensaje' con M mayúscula para tu Bridge de C#
+    return this.http.post<IAConfigResponse>(this.apiUrl, { Mensaje: texto });
   }
 }
