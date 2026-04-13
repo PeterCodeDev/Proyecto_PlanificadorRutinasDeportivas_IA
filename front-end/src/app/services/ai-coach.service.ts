@@ -12,7 +12,7 @@ export interface IAConfigResponse {
 })
 export class AICoachService {
   // Asegúrate de que este puerto coincida con el de tu Visual Studio (C#)
-  private apiUrl = 'http://localhost:8000/docs#/default/generar_rutina_generar_rutina_post';
+  private apiUrl = 'http://localhost:8000/generar-rutina';
 
   constructor(private http: HttpClient) { }
 

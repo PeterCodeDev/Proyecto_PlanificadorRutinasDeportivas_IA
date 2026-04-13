@@ -57,10 +57,10 @@ export class AiCoach implements OnInit {
       error: (err) => {
         console.error('Error en la conexión:', err);
         this.chatHistory.push({
-          texto: 'Lo siento, he perdido la conexión con el servidor. Inténtalo de nuevo.',
+          texto: 'Error de conexión. Revisa que Python y C# estén activos.',
           sender: 'ia'
         });
-        this.cargando = false;
+        this.cargando = false; // <--- ESTO DESBLOQUEA EL BOTÓN "PENSANDO"
       }
     });
   }
