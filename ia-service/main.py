@@ -15,12 +15,10 @@ app.add_middleware(
 print("Cargando modelos de Inteligencia Artificial. Por favor, espera...")
 
 # Modelo A: Generador de texto para el AI Coach (en español)
-# Reemplazamos gpt2-spanish por un modelo CHAT moderno y ligero
-# Pasamos a la versión 2.5 (mucho más inteligente y lógica) y de 1.5 Billones de parámetros
 coach_generator = pipeline(
     "text-generation", 
     model="Qwen/Qwen2.5-1.5B-Instruct",
-    token="hf_aQuI_tU_tOkEn_LaRgUiSiMo" # <-- Tu token de Hugging Face
+    token="hf_aQuI_tU_tOkEn_LaRgUiSiMo" 
 )# Modelo B: Análisis de sentimiento para el Tracker (para cumplir la rúbrica al 100%)
 sentiment_analyzer = pipeline("sentiment-analysis", model="pysentimiento/robertuito-sentiment-analysis")
 
