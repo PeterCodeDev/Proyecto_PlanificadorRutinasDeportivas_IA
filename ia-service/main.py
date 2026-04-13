@@ -87,7 +87,6 @@ def predecir_progresion(data: EntrenamientoRequest):
     if data.comentario:
         analisis = sentiment_analyzer(data.comentario)[0]
         estado_animo = analisis['label'] # Devuelve POS, NEG o NEU
-
     return {
         "recomendacion_peso": round(sugerencia_peso, 1),
         "sentimiento_detectado": estado_animo,
