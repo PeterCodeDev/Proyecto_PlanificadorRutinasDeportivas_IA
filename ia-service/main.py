@@ -15,9 +15,13 @@ app.add_middleware(
 print("Cargando modelos de Inteligencia Artificial. Por favor, espera...")
 
 # Modelo A: Generador de texto para el AI Coach (en español)
-coach_generator = pipeline("text-generation", model="DeepESP/gpt2-spanish")
-
-# Modelo B: Análisis de sentimiento para el Tracker (para cumplir la rúbrica al 100%)
+# Reemplazamos gpt2-spanish por un modelo CHAT moderno y ligero
+# Pasamos a la versión 2.5 (mucho más inteligente y lógica) y de 1.5 Billones de parámetros
+coach_generator = pipeline(
+    "text-generation", 
+    model="Qwen/Qwen2.5-1.5B-Instruct",
+    token="hf_aQuI_tU_tOkEn_LaRgUiSiMo" # <-- Tu token de Hugging Face
+)# Modelo B: Análisis de sentimiento para el Tracker (para cumplir la rúbrica al 100%)
 sentiment_analyzer = pipeline("sentiment-analysis", model="pysentimiento/robertuito-sentiment-analysis")
 
 print("¡Modelos cargados con éxito!")
@@ -38,18 +42,38 @@ def home():
 # --- ENDPOINT PARA LA PANTALLA "AI COACH" ---
 @app.post("/generar-rutina")
 def generar_rutina(data: CoachRequest):
-    # Damos contexto al modelo
-    prompt = f"El atleta dice: '{data.mensaje_usuario}'. Sugerencia de ejercicio:\n"
+    # Le damos vida al asistente de "The Kinetic Gallery"
+    mensajes = [
+        {
+            "role": "system", 
+            "content": """Eres el asistente virtual experto en fitness de 'The Kinetic Gallery'. 
+Tu objetivo es ayudar a los usuarios a planificar sus entrenamientos de forma amable, motivadora y profesional.
+Reglas:
+- Siempre indica un numero de series y repeticiones
+- Sé conversacional y cercano, pero directo.
+- Adapta tus respuestas al material o nivel que te indique el usuario.
+- Termina siempre tus sugerencias con una pregunta interactiva (ej: '¿Empezamos?', '¿Qué te parece?').
+- Responde siempre en español y mantén tus respuestas en un máximo de un párrafo corto."""
+        },
+        {
+            "role": "user", 
+            "content": data.mensaje_usuario
+        }
+    ]
     
-    # Generamos la respuesta con el LLM
-    resultado = coach_generator(prompt, max_new_tokens=40, num_return_sequences=1)
-    texto_generado = resultado[0]['generated_text']
+    # Subimos la temperatura a 0.6 o 0.7. Al ser un modelo más listo, 
+    # esta creatividad le hará sonar más humano y menos robótico.
+    resultado = coach_generator(
+        mensajes, 
+        max_new_tokens=150, # Le damos más espacio para conversar  
+        temperature=0.6,  
+        do_sample=True
+    )
     
-    # Limpiamos la respuesta para no repetir lo que dijo el usuario
-    respuesta_limpia = texto_generado.replace(prompt, "").strip()
+    respuesta_ia = resultado[0]['generated_text'][-1]['content']
 
     return {
-        "respuesta": respuesta_limpia
+        "respuesta": respuesta_ia
     }
 
 # --- ENDPOINT PARA LA PANTALLA "TRACK" ---
