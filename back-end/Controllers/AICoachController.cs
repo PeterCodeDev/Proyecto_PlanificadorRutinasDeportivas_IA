@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 using SmartWorkoutApi.Services;
 
 namespace SmartWorkoutApi.Controllers
@@ -12,8 +13,7 @@ namespace SmartWorkoutApi.Controllers
         public AiCoachController(IHttpClientFactory httpClientFactory)
         {
             _httpClient = httpClientFactory.CreateClient();
-        }
-
+        }  
         [HttpPost("generar-rutina")]
         public async Task<IActionResult> GetRoutine([FromBody] CoachRequest request)
         {
