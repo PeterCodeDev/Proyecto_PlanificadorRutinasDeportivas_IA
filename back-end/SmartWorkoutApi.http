@@ -1,0 +1,6 @@
+@SmartWorkoutApi_HostAddress = http://localhost:5076
+
+GET {{SmartWorkoutApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

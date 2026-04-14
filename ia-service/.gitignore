@@ -1,0 +1,9 @@
+# Ignorar el archivo de configuración sensible
+.env
+
+# Ignorar el entorno virtual (para que no se suban miles de archivos a Git)
+venv/
+
+# Ignorar archivos temporales de Python
+__pycache__/
+*.pyc

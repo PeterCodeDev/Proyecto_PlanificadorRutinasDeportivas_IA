@@ -1,0 +1,110 @@
+<div class="pb-32 relative min-h-screen">
+    <header class="fixed top-0 w-full z-50 bg-white/70 backdrop-blur-xl">
+        <div class="flex justify-between items-center px-6 h-16 w-full max-w-7xl mx-auto">
+            <div class="text-xl font-black tracking-tighter text-blue-700">The Kinetic Gallery</div>
+            <div class="flex items-center gap-4">
+                <span
+                    class="material-symbols-outlined text-slate-500 hover:text-blue-600 transition-colors cursor-pointer"
+                    data-icon="account_circle">account_circle</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="pt-24 px-6 max-w-3xl mx-auto space-y-8">
+        <section class="space-y-6">
+            <div class="flex flex-col gap-2">
+                <span class="font-label text-xs uppercase tracking-widest font-bold text-primary">Intelligent
+                    Training</span>
+                <h1 class="text-4xl font-extrabold tracking-tight text-on-surface">AI Coach</h1>
+            </div>
+        </section>
+
+        <section class="flex flex-col space-y-6 min-h-[400px]">
+            <div class="flex items-center justify-between">
+                <h2 class="text-lg font-bold text-on-surface">Conversación Directa</h2>
+                <span class="text-xs font-label uppercase tracking-widest text-on-surface-variant">Live Assistant</span>
+            </div>
+
+            <div class="space-y-4">
+                <div *ngFor="let msg of chatHistory" class="flex flex-col"
+                    [ngClass]="msg.sender === 'ia' ? 'items-start' : 'items-end self-end'">
+
+                    <div [ngClass]="msg.sender === 'ia' 
+                            ? 'bg-surface-container-high text-on-surface rounded-tl-none' 
+                            : 'bg-primary text-on-primary rounded-tr-none'"
+                        class="p-4 rounded-2xl max-w-[85%] font-body leading-relaxed">
+
+                        <markdown [data]="msg.texto"></markdown>
+
+                    </div>
+
+                    <span class="text-[10px] mt-1 font-label text-on-surface-variant/60 uppercase"
+                        [ngClass]="msg.sender === 'ia' ? 'ml-2' : 'mr-2 text-right'">
+                        {{ msg.sender === 'ia' ? 'AI Assistant' : 'You' }} 
+                    </span>
+                </div>
+
+                <div *ngIf="cargando" class="flex flex-col items-start animate-pulse">
+                    <div class="bg-surface-container-high p-4 rounded-2xl rounded-tl-none text-xs">
+                        Escribiendo rutina...
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="relative w-full h-48 rounded-xl overflow-hidden bg-surface-container-low mb-12">
+            <img class="w-full h-full object-cover opacity-80 mix-blend-multiply" alt="insight background"
+                src="https://images.unsplash.com/photo-1598971639058-fab3c3109a00?q=80&w=600&auto=format&fit=crop" />
+            <div
+                class="absolute inset-0 bg-gradient-to-t from-surface-container-low to-transparent p-6 flex flex-col justify-end">
+                <div class="flex items-center gap-2">
+                    <span class="material-symbols-outlined text-primary text-sm" data-icon="lightbulb">lightbulb</span>
+                    <span class="text-xs font-bold text-on-surface tracking-wide uppercase">Insight: Movilidad
+                        Articular</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div
+        class="fixed bottom-20 left-0 w-full px-6 py-4 bg-white/70 backdrop-blur-xl max-w-3xl mx-auto left-1/2 -translate-x-1/2 z-40">
+        <div class="flex items-center gap-3 bg-surface-container-low rounded-full px-5 py-2">
+            <input [(ngModel)]="mensajeUsuario" (keyup.enter)="enviarConsulta()"
+                class="flex-1 bg-transparent border-none focus:ring-0 text-sm font-body"
+                placeholder="Escribe un mensaje..." type="text" />
+            <button (click)="enviarConsulta()"
+                class="text-primary p-2 flex items-center justify-center hover:scale-110 transition-transform">
+                <span class="material-symbols-outlined" data-icon="send"
+                    style="font-variation-settings: 'FILL' 1;">send</span>
+            </button>
+        </div>
+    </div>
+
+    <nav
+        class="fixed bottom-0 left-0 w-full bg-white/70 dark:bg-slate-900/70 backdrop-blur-xl z-50 rounded-t-[1.5rem] shadow-[0_-20px_40px_rgba(0,88,190,0.06)]">
+        <div class="flex justify-around items-center px-4 py-3 pb-safe">
+
+            <a routerLink="/track"
+                routerLinkActive="bg-blue-100/50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300"
+                class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-5 py-2 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all rounded-2xl cursor-pointer">
+                <span class="material-symbols-outlined filled-icon" data-icon="fitness_center">fitness_center</span>
+                <span class="font-inter text-xs uppercase tracking-widest font-bold mt-1">Track</span>
+            </a>
+
+            <a routerLink="/ai-coach"
+                routerLinkActive="bg-blue-100/50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300"
+                class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-5 py-2 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all rounded-2xl cursor-pointer">
+                <span class="material-symbols-outlined" data-icon="smart_toy">smart_toy</span>
+                <span class="font-inter text-xs uppercase tracking-widest font-bold mt-1">AI Coach</span>
+            </a>
+
+            <a routerLink="/login"
+                routerLinkActive="bg-blue-100/50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300"
+                class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-5 py-2 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all rounded-2xl cursor-pointer">
+                <span class="material-symbols-outlined" data-icon="person">person</span>
+                <span class="font-inter text-xs uppercase tracking-widest font-bold mt-1">Profile</span>
+            </a>
+
+        </div>
+    </nav>
+</div>
