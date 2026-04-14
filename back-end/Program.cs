@@ -26,7 +26,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 //El puente hacia python
-builder.Services.AddHttpClient<IAService>();
+builder.Services.AddHttpClient();
 
 var app = builder.Build();
 
