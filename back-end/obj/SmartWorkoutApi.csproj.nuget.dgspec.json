@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Practicas\\Desktop\\Proyecto_IA\\back-end\\SmartWorkoutApi.csproj": {}
+    "C:\\Users\\Practicas\\source\\repos\\Proyecto_PlanificadorRutinasDeportivas_IA\\back-end\\SmartWorkoutApi.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Practicas\\Desktop\\Proyecto_IA\\back-end\\SmartWorkoutApi.csproj": {
+    "C:\\Users\\Practicas\\source\\repos\\Proyecto_PlanificadorRutinasDeportivas_IA\\back-end\\SmartWorkoutApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Practicas\\Desktop\\Proyecto_IA\\back-end\\SmartWorkoutApi.csproj",
+        "projectUniqueName": "C:\\Users\\Practicas\\source\\repos\\Proyecto_PlanificadorRutinasDeportivas_IA\\back-end\\SmartWorkoutApi.csproj",
         "projectName": "SmartWorkoutApi",
-        "projectPath": "C:\\Users\\Practicas\\Desktop\\Proyecto_IA\\back-end\\SmartWorkoutApi.csproj",
+        "projectPath": "C:\\Users\\Practicas\\source\\repos\\Proyecto_PlanificadorRutinasDeportivas_IA\\back-end\\SmartWorkoutApi.csproj",
         "packagesPath": "C:\\Users\\Practicas\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Practicas\\Desktop\\Proyecto_IA\\back-end\\obj\\",
+        "outputPath": "C:\\Users\\Practicas\\source\\repos\\Proyecto_PlanificadorRutinasDeportivas_IA\\back-end\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
