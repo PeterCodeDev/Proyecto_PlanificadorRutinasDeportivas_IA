@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterLink, RouterLinkActive, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms'; // <--- Importación necesaria
+import { FormsModule } from '@angular/forms'; 
 
 interface Ejercicio {
   id: number;
@@ -16,14 +16,13 @@ interface Ejercicio {
 @Component({
   selector: 'app-track',
   standalone: true,
-  imports: [RouterLink, RouterLinkActive, CommonModule, FormsModule], // <--- Se añade aquí
+  imports: [RouterLink, RouterLinkActive, CommonModule, FormsModule], 
   templateUrl: './track.html',
   styleUrls: ['./track.css']
 })
 export class Track implements OnInit {
   nombreUsuario: string = '';
 
-  // Lista de ejercicios inicial con valores por defecto
   ejercicios: Ejercicio[] = [
     { 
       id: 1, 
@@ -57,6 +56,35 @@ export class Track implements OnInit {
     if (ejercicio) {
       ejercicio.completado = true;
     }
+  }
+
+  // Elimina un ejercicio de la lista por su ID
+  eliminarEjercicio(id: number) {
+    this.ejercicios = this.ejercicios.filter(e => e.id !== id);
+  }
+
+  // Calcula el volumen total de la sesión
+  get volumenTotal(): number {
+    return this.ejercicios
+      .filter(ej => ej.completado)
+      .reduce((total, ej) => total + (ej.peso * ej.reps), 0);
+  }
+
+  // Añade un nuevo ejercicio editable
+  agregarEjercicio() {
+    const nuevoId = this.ejercicios.length > 0 
+      ? Math.max(...this.ejercicios.map(e => e.id)) + 1 
+      : 1;
+      
+    this.ejercicios.push({
+      id: nuevoId,
+      nombre: '', // Lo dejamos vacío para que el usuario escriba
+      grupoMuscular: 'Custom',
+      detalle: 'Extra Set',
+      peso: 0,
+      reps: 0,
+      completado: false
+    });
   }
 
   logout() {
