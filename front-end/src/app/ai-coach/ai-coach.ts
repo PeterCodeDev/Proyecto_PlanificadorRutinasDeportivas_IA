@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AICoachService } from '../services/ai-coach.service';
@@ -20,13 +20,14 @@ interface Mensaje {
 export class AiCoach implements OnInit {
   mensajeUsuario: string = '';
   chatHistory: Mensaje[] = [
-    { texto: '¡Hola! Soy tu coach de Kinetic Gallery. ¿En qué músculo quieres trabajar hoy?', sender: 'ia' }
+    { texto: '¡Hola! Soy tu coach de Smart Workout. ¿Que quieres trabajar hoy?', sender: 'ia' }
   ];
   cargando: boolean = false;
 
   constructor(
     private aiService: AICoachService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private router: Router
   ) { }
 
   ngOnInit(): void { }
@@ -103,4 +104,10 @@ export class AiCoach implements OnInit {
       });
     }, 100);
   }
+
+  logout() {
+    localStorage.removeItem('usuarioNombre'); 
+    this.router.navigate(['/login']); 
+  }
 }
+
