@@ -61,7 +61,7 @@ export class AiCoach implements OnInit {
     this.scrollToBottom();
     this.cdr.detectChanges();
 
-    // 4. Llamada al servicio
+    // 4. Llamada al servicio  
     this.aiService.enviarPregunta(textoParaEnviar, historialParaBackend).subscribe({
       next: (res: any) => {
         console.log('Respuesta recibida:', res);
@@ -106,8 +106,8 @@ export class AiCoach implements OnInit {
   }
 
   logout() {
-    localStorage.removeItem('usuarioNombre'); 
-    this.router.navigate(['/login']); 
+    localStorage.removeItem('usuarioNombre');
+    this.router.navigate(['/login']);
   }
 }
 
