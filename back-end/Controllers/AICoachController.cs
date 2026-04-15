@@ -19,10 +19,10 @@ namespace SmartWorkoutApi.Controllers
         public async Task<IActionResult> GetRoutine([FromBody] CoachRequest request)
         {
             // 1. Verificamos que el historial no sea nulo (si es la primera vez que hablamos, creamos una lista vacia)
-            var historialSeguro = request.Historial ?? new List<string>();
+            var historialSeguro = request.Historial ?? new List<string>(); 
 
             // 2. Construimos el Payload EXACTO que espera el Pydantic Model de FastAPI en Python
-            var payloadParaPython = new
+            var payloadParaPython = new 
             {
                 mensaje_usuario = request.Mensaje,
                 historial = historialSeguro
@@ -35,7 +35,7 @@ namespace SmartWorkoutApi.Controllers
 
                 if (response.IsSuccessStatusCode)
                 {
-                    var contenido = await response.Content.ReadFromJsonAsync<RespuestaIA>();
+                    var contenido = await response.Content.ReadFromJsonAsync<RespuestaIA>(); // <----
                     // Devolvemos a Angular el formato que su interfaz espera
                     return Ok(new { respuesta_ia = contenido.respuesta });
                 }
