@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
-using SmartWorkoutApi.Services;
+using System.Net.Http;
+using System.Net.Http.Json;
 
 namespace SmartWorkoutApi.Controllers
 {
@@ -13,15 +13,19 @@ namespace SmartWorkoutApi.Controllers
         public AiCoachController(IHttpClientFactory httpClientFactory)
         {
             _httpClient = httpClientFactory.CreateClient();
-        }  
+        }
+
         [HttpPost("generar-rutina")]
         public async Task<IActionResult> GetRoutine([FromBody] CoachRequest request)
         {
-            // TRADUCCIÓN CRÍTICA: Angular envía "Mensaje", Python espera "mensaje_usuario"
-            // Al crear este objeto anónimo, evitamos el error 'dynamic' de Visual Studio
-            var payloadParaPython = new
+            // 1. Verificamos que el historial no sea nulo (si es la primera vez que hablamos, creamos una lista vacia)
+            var historialSeguro = request.Historial ?? new List<string>(); 
+
+            // 2. Construimos el Payload EXACTO que espera el Pydantic Model de FastAPI en Python
+            var payloadParaPython = new 
             {
-                mensaje_usuario = request.Mensaje
+                mensaje_usuario = request.Mensaje,
+                historial = historialSeguro
             };
 
             try
@@ -31,7 +35,7 @@ namespace SmartWorkoutApi.Controllers
 
                 if (response.IsSuccessStatusCode)
                 {
-                    var contenido = await response.Content.ReadFromJsonAsync<RespuestaIA>();
+                    var contenido = await response.Content.ReadFromJsonAsync<RespuestaIA>(); // <----
                     // Devolvemos a Angular el formato que su interfaz espera
                     return Ok(new { respuesta_ia = contenido.respuesta });
                 }
@@ -45,7 +49,18 @@ namespace SmartWorkoutApi.Controllers
         }
     }
 
-    // Clases de soporte para evitar el uso de 'dynamic'
-    public class CoachRequest { public string Mensaje { get; set; } }
-    public class RespuestaIA { public string respuesta { get; set; } }
+    // --- CLASES DE SOPORTE ---
+
+    // Lo que recibimos de Angular
+    public class CoachRequest
+    {
+        public string Mensaje { get; set; }
+        public List<string> Historial { get; set; }
+    }
+
+    // Lo que esperamos recibir de Python
+    public class RespuestaIA
+    {
+        public string respuesta { get; set; }
+    }
 }

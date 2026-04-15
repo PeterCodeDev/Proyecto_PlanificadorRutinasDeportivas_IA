@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+<<<<<<< HEAD
+import { RouterLink, RouterLinkActive, Router } from '@angular/router'; // Asegúrate de que Router esté aquí
+import { CommonModule } from '@angular/common';
+=======
 import { RouterLink, RouterLinkActive, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms'; 
@@ -12,17 +16,25 @@ interface Ejercicio {
   reps: number;
   completado: boolean;
 }
+>>>>>>> 57e8d12da78d0ba312f4a82134b5d7f5a51e048c
 
 @Component({
   selector: 'app-track',
   standalone: true,
+<<<<<<< HEAD
+  imports: [RouterLink, RouterLinkActive, CommonModule],
+=======
   imports: [RouterLink, RouterLinkActive, CommonModule, FormsModule], 
+>>>>>>> 57e8d12da78d0ba312f4a82134b5d7f5a51e048c
   templateUrl: './track.html',
   styleUrls: ['./track.css']
 })
 export class Track implements OnInit {
   nombreUsuario: string = '';
 
+<<<<<<< HEAD
+  // 1. El constructor debe recibir el router
+=======
   ejercicios: Ejercicio[] = [
     { 
       id: 1, 
@@ -44,10 +56,18 @@ export class Track implements OnInit {
     }
   ];
 
+>>>>>>> 57e8d12da78d0ba312f4a82134b5d7f5a51e048c
   constructor(private router: Router) {} 
 
   ngOnInit() {
     const guardado = localStorage.getItem('usuarioNombre');
+<<<<<<< HEAD
+    this.nombreUsuario = guardado ? guardado : 'Atleta';
+  }
+
+  // 2. ESTA ES LA FUNCIÓN QUE TE PIDE EL ERROR. 
+  // Debe estar dentro de las llaves de "export class Track"
+=======
     this.nombreUsuario = guardado ? guardado : 'Julio Sanchez';
   }
 
@@ -87,8 +107,13 @@ export class Track implements OnInit {
     });
   }
 
+>>>>>>> 57e8d12da78d0ba312f4a82134b5d7f5a51e048c
   logout() {
     localStorage.removeItem('usuarioNombre'); 
     this.router.navigate(['/login']); 
   }
+<<<<<<< HEAD
+} // <-- Esta es la última llave que cierra la clase
+=======
 }
+>>>>>>> 57e8d12da78d0ba312f4a82134b5d7f5a51e048c
