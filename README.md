@@ -1,4 +1,4 @@
-# 🤖 Kinetic Gallery - AI Intelligent Coach 🏋️‍♂️
+# 🤖 Smart Workout IA - AI Intelligent Coach 🏋️‍♂️
 
 ![Angular](https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white)
 ![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi)
@@ -6,7 +6,7 @@
 ![OpenAI](https://img.shields.io/badge/OpenAI-412991?style=for-the-badge&logo=openai&logoColor=white)
 ![CrewAI](https://img.shields.io/badge/CrewAI-Multi--Agent-orange?style=for-the-badge)
 
-**Kinetic Gallery AI Coach** es un planificador de rutinas inteligente que utiliza una arquitectura de **Multi-Agentes Inteligentes** para diseñar entrenamientos personalizados basados en biomecánica y motivación deportiva.
+**Smart Workout IA Coach** es un planificador de rutinas inteligente que utiliza una arquitectura de **Multi-Agentes Inteligentes** para diseñar entrenamientos personalizados basados en biomecánica y motivación deportiva.
 
 ---
 
